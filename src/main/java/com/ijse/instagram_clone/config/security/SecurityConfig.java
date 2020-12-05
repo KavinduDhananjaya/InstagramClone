@@ -19,11 +19,6 @@ import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.Resource;
 
-/**
- * Created by :- Intellij Idea
- * Author :- Tharindu
- * Date :- 9/25/2019
- */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -49,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/v1/oauth/token/**").permitAll();
+                .antMatchers("/oauth/token/**").permitAll();
     }
 
     @Bean

@@ -1,5 +1,6 @@
 package com.ijse.instagram_clone.config.security;
-import com.ijse.instagram_clone.service.UserService;
+import com.ijse.instagram_clone.dto.UserDTO;
+import com.ijse.instagram_clone.service.auth.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -17,10 +18,10 @@ import java.util.Map;
 @Component
 public class CustomTokenEnhancer extends JwtAccessTokenConverter {
 
-    private final UserService userService;
+    private final AuthUserService userService;
 
     @Autowired
-    public CustomTokenEnhancer(UserService userService) {
+    public CustomTokenEnhancer(AuthUserService userService) {
         this.userService = userService;
     }
 
@@ -36,7 +37,7 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
 
         User user = (User) oAuth2Authentication.getPrincipal();
 
-        AdminDTO userForToken = userService.getUserForToken(user.getUsername());
+        UserDTO userForToken = userService.getUserForToken(user.getUsername());
 
         additionalInfo.put("user", userForToken);
 

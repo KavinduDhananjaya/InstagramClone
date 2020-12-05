@@ -20,6 +20,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
+import static com.ijse.instagram_clone.config.security.SecurityConstants.*;
+
 
 @Configuration
 @EnableAuthorizationServer
@@ -49,12 +51,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         // admin
         configurer
                 .inMemory()
-                .withClient(ADMIN_CLIENT_ID)
+                .withClient(USER_CLIENT_ID)
                 .secret(passwordEncoder.encode(""))
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
                 .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-                .accessTokenValiditySeconds(ADMIN_ACCESS_TOKEN_VALIDITY_SECONDS)
-                .refreshTokenValiditySeconds(ADMIN_REFRESH_TOKEN_VALIDITY_SECONDS);
+                .accessTokenValiditySeconds(USER_ACCESS_TOKEN_VALIDITY_SECONDS)
+                .refreshTokenValiditySeconds(USER_REFRESH_TOKEN_VALIDITY_SECONDS);
         //jdbc clients
 //        configurer.jdbc(dataSource);
     }

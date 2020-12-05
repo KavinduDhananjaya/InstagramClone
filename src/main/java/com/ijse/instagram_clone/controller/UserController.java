@@ -22,13 +22,13 @@ public class UserController {
         return userServiceImpl.getAllUsers();
     }
 
-    @GetMapping("find/{uid}")
+    @GetMapping("/find/{uid}")
     public User findBook(@PathVariable int uid) {
 
         return userServiceImpl.findUser(uid);
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public User addUser(@RequestBody User user) {
         return userServiceImpl.addUser(user);
     }

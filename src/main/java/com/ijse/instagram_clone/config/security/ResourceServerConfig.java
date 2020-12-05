@@ -7,11 +7,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 
-/**
- * Created by :- Intellij Idea
- * Author :- Tharindu
- * Date :- 9/25/2019
- */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -28,10 +23,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.
 //                anonymous().disable().
                 authorizeRequests()
-                .antMatchers("/ideamart/sms/**", "/ideamart/ussd/**", "/ideamart/subscription/**").permitAll()
-//                .antMatchers("/**").permitAll()
+                .antMatchers("/user/add").permitAll()
                 //The order of the rules matters and the more specific rules should go first.
-                .antMatchers("/ideamart/admin/**").access("hasAuthority('ROLE_ADMIN')")
+                .antMatchers("/user/**").access("hasAuthority('ROLE_USER')")
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
         http.csrf().disable();
     }

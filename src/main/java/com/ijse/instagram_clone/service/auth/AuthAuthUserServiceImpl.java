@@ -1,5 +1,8 @@
 package com.ijse.instagram_clone.service.auth;
 
+import com.ijse.instagram_clone.dto.UserDTO;
+import com.ijse.instagram_clone.repository.UserRepository;
+import com.ijse.instagram_clone.util.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service(value = "userService")
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class AuthAuthUserServiceImpl implements AuthUserService, UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private HttpServletRequest httpServletRequest;
 
     @Autowired
-    private AdminRepository adminRepository;
+    private UserRepository userRepository;
 
 
     @Override
@@ -32,40 +35,38 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
 
-            AdminDTO admin = getAdminUser(username);
-            return new User(admin.getUsername(), admin.getPassword(),
-                    getAuthority("ADMIN"));
+            UserDTO user = getUser(username);
+            return new User(user.getEmail(), user.getPassword(),
+                    getAuthority("USER"));
         } catch (Exception e) {
             e.printStackTrace();
-            LOGGER.error("Exception : " + e.getMessage());
-            throw new IlocateException("Something went wrong, " +e.getMessage());
+            throw new CustomException("Something went wrong, " +e.getMessage());
         }
     }
 
-    private AdminDTO getAdminUser(String username) {
-        PmAdmin admin = adminRepository.findByUserName(username);
-        if (admin == null) {
-            throw new IlocateException(404, "No admin found for : " + username);
+    private UserDTO getUser(String username) {
+        com.ijse.instagram_clone.entity.User userByEmail = userRepository.findUserByEmail(username);
+        if (userByEmail == null) {
+            throw new CustomException(404, "No user found for : " + username);
         }
 
-        AdminDTO adminDTO= new AdminDTO();
-        adminDTO.setUsername(admin.getUserName());
-        adminDTO.setPassword(admin.getPassword());
-        return adminDTO;
+        UserDTO userDTO= new UserDTO();
+        userDTO.setEmail(userByEmail.getEmail());
+        userDTO.setName(userByEmail.getName());
+        userDTO.setPassword(userByEmail.getPassword());
+        return userDTO;
     }
 
     @Override
     @Transactional
-    public AdminDTO getUserForToken(String username) {
+    public UserDTO getUserForToken(String username) {
         try {
-            LOGGER.info("Get user for token method \n Username : " + username );
-            AdminDTO admin = getAdminUser(username);
-            admin.setPassword(null);
-            return admin;
+            UserDTO user = getUser(username);
+            user.setPassword(null);
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
-            LOGGER.error("Exception : " + e.getMessage());
-            throw new IlocateException("Cannot get user details ! " + e.getMessage());
+            throw new CustomException("Cannot get user details ! " + e.getMessage());
         } finally {
             httpServletRequest.getSession().invalidate();
         }
