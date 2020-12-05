@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -30,6 +30,7 @@ public class UserController {
 
     @PostMapping("/add")
     public User addUser(@RequestBody User user) {
+
         return userServiceImpl.addUser(user);
     }
 
