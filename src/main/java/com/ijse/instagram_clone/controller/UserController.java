@@ -30,6 +30,7 @@ public class UserController {
 
     @PostMapping("/add")
     public User addUser(@RequestBody User user) {
+
         return userServiceImpl.addUser(user);
     }
 
