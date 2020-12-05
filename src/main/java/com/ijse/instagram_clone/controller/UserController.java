@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/find/{uid}")
-    public User findBook(@PathVariable int uid) {
+    public User findUser(@PathVariable int uid) {
 
         return userServiceImpl.findUser(uid);
     }
