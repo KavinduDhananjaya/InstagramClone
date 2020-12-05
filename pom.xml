@@ -19,53 +19,61 @@
     </properties>
 
     <dependencies>
+
+
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
+
             <artifactId>spring-boot-starter-web</artifactId>
+
         </dependency>
 
+
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
+
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+
         </dependency>
 
 
         <dependency>
+
             <groupId>mysql</groupId>
+
             <artifactId>mysql-connector-java</artifactId>
+
             <scope>runtime</scope>
+
         </dependency>
 
+
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
+
             <artifactId>spring-boot-starter-test</artifactId>
+
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>2.0.10.RELEASE</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>1.0.10.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+
+
             <exclusions>
+
+
                 <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
+
+                    <groupId>org.junit.vintage</groupId>
+
+                    <artifactId>junit-vintage-engine</artifactId>
+
                 </exclusion>
+
             </exclusions>
+
         </dependency>
+
     </dependencies>
 
     <build>
