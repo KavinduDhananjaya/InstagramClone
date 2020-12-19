@@ -1,32 +1,42 @@
 package com.ijse.instagram_clone.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Post {
 
     @Id
-    private String id;
+    private long id;
     private String imgUrl;
     private String text;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Comment> comments;
+
+
     public Post() {
+
     }
 
-    public Post(String id, String imgUrl, String text) {
+    public Post(long id, String imgUrl, String text, User user, List<Comment> comments) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.text = text;
+        this.user = user;
+        this.comments = comments;
     }
 
-    public String getId() {
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -46,12 +56,30 @@ public class Post {
         this.text = text;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
                 "id='" + id + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", text='" + text + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

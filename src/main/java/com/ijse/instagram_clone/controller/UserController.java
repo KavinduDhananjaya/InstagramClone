@@ -18,11 +18,13 @@ public class UserController {
 
     @GetMapping("/all")
     public List<User> getAllUsers() {
+
         return userServiceImpl.getAllUsers();
     }
 
-    @GetMapping("/find/{uid}")
-    public User findUser(@PathVariable int uid) {
+    @GetMapping("find/{uid}")
+    public User findBook(@PathVariable int uid) {
+
         return userServiceImpl.findUser(uid);
     }
 
