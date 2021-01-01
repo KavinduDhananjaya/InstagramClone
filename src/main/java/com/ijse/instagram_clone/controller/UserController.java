@@ -23,15 +23,14 @@ public class UserController {
     }
 
     @GetMapping("find/{uid}")
-    public User findBook(@PathVariable int uid) {
+    public User findUser(@PathVariable int uid) {
 
         return userServiceImpl.findUser(uid);
     }
 
     @PostMapping("/add")
-    public User addUser(@RequestBody User user) {
-
-        return userServiceImpl.addUser(user);
+    public void addUser(@RequestBody User user) {
+         userServiceImpl.addUser(user);
     }
 
 }

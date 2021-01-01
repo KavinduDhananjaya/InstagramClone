@@ -1,6 +1,5 @@
 package com.ijse.instagram_clone.entity;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
