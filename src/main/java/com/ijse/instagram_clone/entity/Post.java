@@ -19,19 +19,25 @@ public class Post {
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<React> reacts;
+
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Share> shares;
 
     public Post() {
-
     }
 
-    public Post(long id, String imgUrl, String text, User user, List<Comment> comments) {
+    public Post(long id, String imgUrl, String text, User user, List<Comment> comments, List<React> reacts, List<Share> shares) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.text = text;
         this.user = user;
         this.comments = comments;
+        this.reacts = reacts;
+        this.shares = shares;
     }
-
 
     public long getId() {
         return id;
@@ -65,7 +71,6 @@ public class Post {
         this.user = user;
     }
 
-
     public List<Comment> getComments() {
         return comments;
     }
@@ -74,13 +79,32 @@ public class Post {
         this.comments = comments;
     }
 
+    public List<React> getReacts() {
+        return reacts;
+    }
+
+    public void setReacts(List<React> reacts) {
+        this.reacts = reacts;
+    }
+
+    public List<Share> getShares() {
+        return shares;
+    }
+
+    public void setShares(List<Share> shares) {
+        this.shares = shares;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", text='" + text + '\'' +
                 ", user=" + user +
+                ", comments=" + comments +
+                ", reacts=" + reacts +
+                ", shares=" + shares +
                 '}';
     }
 }
