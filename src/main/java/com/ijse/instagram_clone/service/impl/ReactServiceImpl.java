@@ -29,7 +29,9 @@ public class ReactServiceImpl implements ReactService {
 
         Post post = postRepository.findPostById(postId);
         User currentUser = userRepository.findUserByEmail("");
-        React react = new React(001, reactType, post, currentUser);
+
+        React react = new React(reactType, post, currentUser);
+
         reactRepository.save(react);
     }
 

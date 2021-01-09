@@ -23,8 +23,7 @@ public class React {
     public React() {
     }
 
-    public React(long id, int reactType, Post post, User user) {
-        this.id = id;
+    public React(int reactType, Post post, User user) {
         this.reactType = reactType;
         this.post = post;
         this.user = user;

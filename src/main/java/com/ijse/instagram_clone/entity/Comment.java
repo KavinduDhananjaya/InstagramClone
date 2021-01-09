@@ -1,6 +1,8 @@
 package com.ijse.instagram_clone.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Comment {
@@ -9,7 +11,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String comment;
-
+    private LocalDateTime commentTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
@@ -23,11 +25,19 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(long id, String comment, Post post, User user) {
-        this.id = id;
+    public Comment(String comment, LocalDateTime commentTime, Post post, User user) {
         this.comment = comment;
+        this.commentTime = commentTime;
         this.post = post;
         this.user = user;
+    }
+
+    public LocalDateTime getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(LocalDateTime commentTime) {
+        this.commentTime = commentTime;
     }
 
     public long getId() {
