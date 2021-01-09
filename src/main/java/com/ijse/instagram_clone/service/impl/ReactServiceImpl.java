@@ -11,6 +11,8 @@ import com.ijse.instagram_clone.service.ReactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReactServiceImpl implements ReactService {
 
@@ -27,8 +29,12 @@ public class ReactServiceImpl implements ReactService {
 
         Post post = postRepository.findPostById(postId);
         User currentUser = userRepository.findUserByEmail("");
-
         React react = new React(001, reactType, post, currentUser);
         reactRepository.save(react);
+    }
+
+    @Override
+    public List<React> getReactList(long postId) {
+        return reactRepository.findReactsByPost(postId);
     }
 }

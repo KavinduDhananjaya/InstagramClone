@@ -31,8 +31,6 @@ public class UserServiceImpl implements UserService {
         if (usr != null) throw new CustomException(403, "We found another customer for this telephone number");
 
         userRepository.save(user);
-
-
     }
 
 
