@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-       User usr= userRepository.findUserByEmail(user.getEmail());
+       User usr= userRepository.getUserByEmail(user.getEmail());
 
         if (usr != null) throw new CustomException(403, "We found another customer for this telephone number");
 

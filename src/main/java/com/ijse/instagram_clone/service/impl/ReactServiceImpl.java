@@ -1,6 +1,5 @@
 package com.ijse.instagram_clone.service.impl;
 
-import com.ijse.instagram_clone.controller.ReactController;
 import com.ijse.instagram_clone.entity.Post;
 import com.ijse.instagram_clone.entity.React;
 import com.ijse.instagram_clone.entity.User;
@@ -28,7 +27,7 @@ public class ReactServiceImpl implements ReactService {
     public void addReact(int reactType, long postId) {
 
         Post post = postRepository.findPostById(postId);
-        User currentUser = userRepository.findUserByEmail("");
+        User currentUser = userRepository.getUserByEmail("");
 
         React react = new React(reactType, post, currentUser);
 

@@ -45,7 +45,7 @@ public class AuthAuthUserServiceImpl implements AuthUserService, UserDetailsServ
     }
 
     private UserDTO getUser(String username) {
-        com.ijse.instagram_clone.entity.User userByEmail = userRepository.findUserByEmail(username);
+        com.ijse.instagram_clone.entity.User userByEmail = userRepository.getUserByEmail(username);
         if (userByEmail == null) {
             throw new CustomException(404, "No user found for : " + username);
         }
